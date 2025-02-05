@@ -1,17 +1,22 @@
 // This file sets up a simple CRUD app using IndexedDB and utilizes UI elements defined in index.html
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Attach event listener to the Create button
-  const createButton = document.getElementById("createButton");
-  const itemInput = document.getElementById("itemInput");
+  // Attach event listener to the Fetch Items button
+  const fetchItemsButton = document.getElementById("fetchItemsButton");
+  fetchItemsButton.addEventListener("click", async () => {
+    const items = await fetchItems();
+    console.log("Fetched items:", items);
+    displayResponse(items); // Display the fetched items in the pre tag
+  });
 
-  createButton.addEventListener("click", async () => {
-    const name = itemInput.value.trim();
-    if (name) {
-      await addItem(name);
-      itemInput.value = "";
-      await renderItems();
+  // Attach event listener to the Store Items button
+  const storeItemsButton = document.getElementById("storeItemsButton");
+  storeItemsButton.addEventListener("click", async () => {
+    const items = await fetchItems();
+    for (const item of items) {
+      await addItem(item.name); // Assuming you want to store only the name
     }
+    await renderItems();
   });
 
   // Debug Buttons
@@ -55,6 +60,12 @@ document.addEventListener("DOMContentLoaded", () => {
   renderItems();
 });
 
+// Function to display the fetched response in the pre tag
+function displayResponse(data) {
+  const responseOutput = document.getElementById("responseOutput");
+  responseOutput.textContent = JSON.stringify(data, null, 2); // Format JSON with indentation
+}
+
 /*-------------------------------
   IndexedDB CRUD Functions
 -------------------------------*/
@@ -67,7 +78,10 @@ function openDatabase() {
       const db = event.target.result;
       if (!db.objectStoreNames.contains("items")) {
         // Create the "items" store with keyPath "id" (auto-increment enabled)
-        const store = db.createObjectStore("items", { keyPath: "id", autoIncrement: true });
+        const store = db.createObjectStore("items", {
+          keyPath: "id",
+          autoIncrement: true,
+        });
         store.createIndex("name", "name", { unique: false });
       }
     };
@@ -97,6 +111,21 @@ async function addItem(name) {
       reject(request.error);
     };
   });
+}
+
+// Fetch items from the API
+async function fetchItems() {
+  try {
+    const response = await fetch("http://localhost:3000/api/items");
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.items; // Return the items array
+  } catch (error) {
+    console.error("Error fetching items:", error);
+    return [];
+  }
 }
 
 // Retrieves all items from the "items" store.
@@ -155,8 +184,7 @@ async function deleteItem(id) {
 // For each item, it presents "Update" and "Delete" buttons.
 async function renderItems() {
   const itemList = document.getElementById("itemList");
-  // Clear current list
-  itemList.innerHTML = "";
+  itemList.innerHTML = ""; // Clear current list
 
   try {
     const items = await getItems();
@@ -167,7 +195,7 @@ async function renderItems() {
         const li = document.createElement("li");
         li.className = "mb-2 flex items-center";
         li.innerHTML = `<span class="flex-1">${item.name}</span>`;
-        
+
         // Create Update button
         const updateBtn = document.createElement("button");
         updateBtn.className = "bg-yellow-500 text-white px-2 py-1 mr-2 rounded";
