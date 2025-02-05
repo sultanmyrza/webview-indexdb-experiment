@@ -7,11 +7,14 @@ This repository contains a React Native (Expo) application and a Node.js server 
 The project is structured as a monorepo, containing:
 
 - **`client/`**: The Expo/React Native mobile application. This app downloads web content (index.html, styles.css, main.js) from the server, unzips it, and serves it locally using `react-native-static-server`. A `WebView` component then loads this content, enabling interaction with IndexedDB.
+
 - **`server/`**: The Node.js backend. This server provides the initial web content as a zipped archive (`content.zip`) and can also serve initial data from a SQLite database.
+
+- **`content-zip/`**: A web project (containing HTML, CSS, and JavaScript files) that gets compressed into `content.zip`. The **`server`** hosts this zip file, which the **`client`** downloads and extracts locally. The extracted content is then displayed in the WebView component for offline access. This **`content-zip`** uses IndexedDB within the WebView to test storage limitations and capabilities.
 
 ## Testing IndexedDB
 
-The `index.html` file contains the JavaScript code necessary to test IndexedDB functionality. You can modify this code to explore different aspects of IndexedDB, such as:
+The `index.html` from **`content.zip`** contains the JavaScript code necessary to test IndexedDB functionality. You can modify this code to explore different aspects of IndexedDB, such as:
 
 - Storage limits
 - Data types
