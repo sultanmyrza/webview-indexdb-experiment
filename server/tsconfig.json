@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "es2016",                                  /* Modern enough for Node.js */
+    
+    /* Modules */
+    "module": "commonjs",                                /* Node.js uses CommonJS */
+    "rootDir": "./src",                                  /* Source files location */
+    "outDir": "./dist",                                  /* Compiled output location */
+    
+    /* Type Checking */
+    "strict": true,                                      /* Enable all strict type checks */
+    
+    /* Interop Constraints */
+    "esModuleInterop": true,                             /* Required for Express and other CommonJS modules */
+    "forceConsistentCasingInFileNames": true,            /* Avoid cross-platform issues */
+    
+    /* Completeness */
+    "skipLibCheck": true                                 /* Skip type checking of declaration files */
+  },
+  "include": ["src/**/*"],                               /* Only include source files */
+  "exclude": ["node_modules"]                            /* Exclude dependencies */
+}
