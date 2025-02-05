@@ -67,11 +67,32 @@ sequelize
     console.error("Unable to connect to the database:", err);
   });
 
-// Endpoint to get all items
+// Endpoint to get all items with pagination
 app.get("/api/items", async (req, res) => {
+  const limit = parseInt(req.query.limit as string) || 10; // Default limit to 10
+  const page = parseInt(req.query.page as string) || 1; // Default page to 1
+
+  const offset = (page - 1) * limit; // Calculate the offset for pagination
+
   try {
-    const items = await Item.findAll();
-    res.json(items);
+    const { count, rows } = await Item.findAndCountAll({
+      limit: limit, // Limit the number of items returned
+      offset: offset, // Skip the items based on the current page
+    });
+
+    const totalPages = Math.ceil(count / limit); // Calculate total pages
+    const currentPage = page; // Current page
+    const nextPage = currentPage < totalPages ? currentPage + 1 : null; // Next page link
+    const prevPage = currentPage > 1 ? currentPage - 1 : null; // Previous page link
+
+    res.json({
+      totalItems: count, // Total number of items
+      totalPages: totalPages, // Total number of pages
+      currentPage: currentPage, // Current page number
+      nextPage: nextPage, // Next page number or null
+      prevPage: prevPage, // Previous page number or null
+      items: rows, // The items for the current page
+    });
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch items" });
   }
