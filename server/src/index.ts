@@ -7,6 +7,7 @@ import {
   IMAGE_THUMBNAIL_URL,
   STATIC_URL,
 } from "./constants";
+import cors from "cors";
 
 const app = express();
 const PORT = 3000;
@@ -43,6 +44,9 @@ const Item = sequelize.define("Item", {
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Use CORS middleware
+app.use(cors()); // Enable CORS for all routes
 
 app.use(express.static(STATIC_URL));
 
