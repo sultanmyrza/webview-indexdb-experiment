@@ -1,0 +1,6 @@
+# IDE/Editor specific
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
