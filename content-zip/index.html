@@ -12,18 +12,36 @@
 
 <body>
   <div id="app">
-    <div class="container mx-auto p-4">
-      <h1 class="text-2xl font-bold mb-4">Fetch and Store Items</h1>
-      <div class="mb-4">
-        <button id="fetchItemsButton" class="bg-blue-500 text-white p-2 rounded">
+    <div class="flex flex-col gap-4 mx-auto p-4">
+      <h1 class="text-2xl font-bold mb-4">Fetch and Store Items in IndexDB</h1>
+      
+      <div>
+        <h2 class="font-bold">Fetch Response:</h2>
+        <pre id="responseOutput" class="border p-4 h-64 overflow-auto"></pre>
+      </div>
+      
+      <div>
+        <h2 class="font-bold">Index DB content:</h2>
+        <ul id="itemList" class="border list-disc p-4 h-64 overflow-y-auto"></ul>
+      </div>
+      
+      <div class="flex flex-wrap gap-2">
+        <button id="fetchItemsButton" class="bg-blue-500 text-white p-1 rounded">
           Fetch Items
         </button>
-        <button id="storeItemsButton" class="bg-green-500 text-white p-2 rounded">
-          Store Items in IndexedDB
+        <button id="storeItemsButton" class="bg-green-500 text-white p-1 rounded">
+          Save to IndexDB
+        </button>
+        <button id="clearIndexedDBButton" class="bg-red-500 text-white p-1 rounded">
+          Clear IndexDB
+        </button>
+        <button id="prevPageButton" class="bg-gray-500 text-white p-1 rounded">
+          Previous Page
+        </button>
+        <button id="nextPageButton" class="bg-gray-500 text-white p-1 rounded">
+          Next Page
         </button>
       </div>
-      <pre id="responseOutput" class="border p-4 my-4 h-64 overflow-auto"></pre>
-      <ul id="itemList" class="list-disc ml-6"></ul>
     </div>
   </div>
   <script type="module" src="/src/main.js"></script>
