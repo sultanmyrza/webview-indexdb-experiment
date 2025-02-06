@@ -1,7 +1,8 @@
-import React from "react";
-import { View, Text, ActivityIndicator, Button } from "react-native";
-import { WebView } from "react-native-webview";
 import { useStaticServer } from "@/contexts/StaticServerContext";
+import Constants from 'expo-constants';
+import React from "react";
+import { ActivityIndicator, Button, Text, View } from "react-native";
+import { WebView } from "react-native-webview";
 
 export default function StaticServerWebView() {
   const { loading, error, serverUrl, restartServer } = useStaticServer();
@@ -13,7 +14,7 @@ export default function StaticServerWebView() {
   const serverUrlUnavailable = !serverUrl && !loading && !error;
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, marginTop: Constants.statusBarHeight }}>
       {loading && (
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <ActivityIndicator size="large" color="#0000ff" />
