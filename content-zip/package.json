@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node zipDist.cjs",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "archiver": "^7.0.1",
     "vite": "^6.0.5"
   }
 }
