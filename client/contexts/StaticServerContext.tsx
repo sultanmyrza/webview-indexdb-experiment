@@ -1,3 +1,6 @@
+import { downloadAndUnzip } from "@/utils/zip";
+import Server, { STATES } from "@dr.pogodin/react-native-static-server";
+import * as FileSystem from "expo-file-system";
 import {
   createContext,
   ReactNode,
@@ -5,9 +8,6 @@ import {
   useEffect,
   useState,
 } from "react";
-import * as FileSystem from "expo-file-system";
-import Server, { STATES } from "@dr.pogodin/react-native-static-server";
-import { downloadAndUnzip } from "@/utils/zip";
 
 type StaticServerContextType = {
   loading: boolean;
@@ -33,7 +33,7 @@ export function StaticServerProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<string | null>(null);
   const [serverUrl, setServerUrl] = useState<string | null>(null);
   const [server, setServer] = useState<Server | null>(null);
-  const ZIP_URL = "10.186.242.51";
+  const ZIP_URL = "http://10.186.242.51:3000/content.zip";
 
   const startServer = async () => {
     try {
