@@ -25,7 +25,7 @@ function openDatabase() {
 
 export async function fetchItems(page) {
   try {
-    const response = await fetch(`http://localhost:3000/api/items?page=${page}`);
+    const response = await fetch(`http://10.186.242.51:3000/api/items?page=${page}`);
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
