@@ -1,17 +1,12 @@
-import { StyleSheet } from "react-native";
 
-import Constants from "expo-constants";
-import WebView from "react-native-webview";
+import StaticServerWebView from "@/components/StaticServerWebView";
+import { StaticServerProvider } from "@/contexts/StaticServerContext";
 
 export default function HomeScreen() {
   return (
-    <WebView style={styles.webView} source={{ uri: "https://expo.dev" }} />
+    <StaticServerProvider>
+      <StaticServerWebView></StaticServerWebView>
+    </StaticServerProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  webView: {
-    flex: 1,
-    marginTop: Constants.statusBarHeight,
-  },
-});
