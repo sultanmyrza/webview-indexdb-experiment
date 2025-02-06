@@ -36,3 +36,8 @@ yarn-error.*
 *.tsbuildinfo
 
 app-example
+
+# Continuous Native Generation (CNG) 
+# see https://docs.expo.dev/workflow/continuous-native-generation/#usage-with-eas-build
+/android
+/ios
