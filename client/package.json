@@ -15,6 +15,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@dr.pogodin/react-native-fs": "^2.31.0",
     "@dr.pogodin/react-native-static-server": "^0.19.0",
     "@expo/vector-icons": "^14.0.2",
     "@react-navigation/bottom-tabs": "^7.2.0",
