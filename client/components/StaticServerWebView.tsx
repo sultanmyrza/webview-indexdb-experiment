@@ -1,20 +1,19 @@
 import { useStaticServer } from "@/contexts/StaticServerContext";
-import Constants from 'expo-constants';
+import Constants from "expo-constants";
 import React from "react";
-import { ActivityIndicator, Button, Text, View } from "react-native";
+import { ActivityIndicator, Text, View } from "react-native";
 import { WebView } from "react-native-webview";
+import StaticServerDebugger from "./StaticServerDebugger";
 
 export default function StaticServerWebView() {
-  const { loading, error, serverUrl, restartServer } = useStaticServer();
-
-  const handleRestart = () => {
-    restartServer();
-  };
+  const { loading, error, serverUrl } = useStaticServer();
 
   const serverUrlUnavailable = !serverUrl && !loading && !error;
 
   return (
     <View style={{ flex: 1, marginTop: Constants.statusBarHeight }}>
+      <StaticServerDebugger />
+
       {loading && (
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <ActivityIndicator size="large" color="#0000ff" />
@@ -35,10 +34,6 @@ export default function StaticServerWebView() {
       )}
 
       {serverUrl && <WebView source={{ uri: serverUrl }} style={{ flex: 1 }} />}
-
-      <View style={{ padding: 10 }}>
-        <Button title="Restart Server" onPress={handleRestart} />
-      </View>
     </View>
   );
 }
