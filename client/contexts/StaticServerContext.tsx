@@ -1,6 +1,5 @@
-import { downloadAndUnzip } from "@/utils/zip";
+import { getStaticFilesDir } from "@/utils/staticFiles";
 import Server, { STATES } from "@dr.pogodin/react-native-static-server";
-import * as FileSystem from "expo-file-system";
 import {
   createContext,
   ReactNode,
@@ -33,7 +32,6 @@ export function StaticServerProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<string | null>(null);
   const [serverUrl, setServerUrl] = useState<string | null>(null);
   const [server, setServer] = useState<Server | null>(null);
-  const ZIP_URL = "http://10.186.242.48:3000/content.zip";
 
   const startServer = async () => {
     try {
@@ -41,13 +39,11 @@ export function StaticServerProvider({ children }: { children: ReactNode }) {
       setError(null);
       await stopServer();
 
-      // Download and unzip content
-      const dest = `${FileSystem.documentDirectory}content/`;
-      const unzippedLocation = await downloadAndUnzip(`${ZIP_URL}`, dest);
+      const staticFilesDir = await getStaticFilesDir();
 
       // Create server
       const staticServer = new Server({
-        fileDir: unzippedLocation,
+        fileDir: staticFilesDir,
         port: 0, // Let the server pick an available port
         hostname: "127.0.0.1", // Local loopback address
       });
