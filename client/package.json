@@ -9,7 +9,13 @@
     "ios": "expo run:ios --device",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "build:ios:local:development":"eas build --local --platform ios --development preview",
+    "build:android:local:development":"eas build --local --platform android --development preview",
+    "build:ios:local:profile":"eas build --local --platform ios --profile preview",
+    "build:android:local:profile":"eas build --local --platform android --profile preview",
+    "build:ios:local:production":"eas build --local --platform ios --production preview",
+    "build:android:local:production":"eas build --local --platform android --production preview"
   },
   "jest": {
     "preset": "jest-expo"
