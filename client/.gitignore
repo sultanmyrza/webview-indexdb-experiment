@@ -41,3 +41,8 @@ app-example
 # see https://docs.expo.dev/workflow/continuous-native-generation/#usage-with-eas-build
 /android
 /ios
+
+# EAS local buid outputs
+build-*.ipa
+build-*.apk
+build-*.aab
