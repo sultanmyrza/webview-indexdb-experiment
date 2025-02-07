@@ -1,5 +1,5 @@
-import { fetchItems, storeAllItems, getItems, clearIndexedDB, deleteItem } from '../models/itemModel.js';
-import { displayResponse, updatePaginationButtons, renderItems } from '../views/itemView.js';
+import { clearIndexedDB, deleteItem, fetchItems, getItems, storeAllItems } from '../models/itemModel.js';
+import { displayResponse, renderItems, updatePaginationButtons } from '../views/itemView.js';
 
 let currentPage = 1;
 let totalPages = 1;
@@ -20,6 +20,13 @@ export function setupEventListeners() {
   clearIndexedDBButton.addEventListener("click", async () => {
     await clearIndexedDB();
     renderItems([]);
+  });
+
+  // Add event listener for reloading IndexedDB content
+  const reloadIndexedDBButton = document.getElementById("reloadIndexedDBButton");
+  reloadIndexedDBButton.addEventListener("click", async () => {
+    const storedItems = await getItems(); // Get items from IndexedDB
+    renderItems(storedItems); // Render items from IndexedDB
   });
 
   // Add event listener for item removal
