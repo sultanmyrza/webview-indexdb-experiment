@@ -33,7 +33,15 @@ export default function StaticServerWebView() {
         </View>
       )}
 
-      {serverUrl && <WebView source={{ uri: serverUrl }} style={{ flex: 1 }} />}
+      {serverUrl && (
+        <WebView
+          source={{ uri: serverUrl }}
+          originWhitelist={["*"]}
+          allowUniversalAccessFromFileURLs={true} // Required for local IndexedDB
+          allowingReadAccessToURL={"file://"} // Required for iOS
+          style={{ flex: 1 }}
+        />
+      )}
     </View>
   );
 }
