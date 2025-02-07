@@ -12,8 +12,8 @@
     "lint": "expo lint",
     "build:ios:local:development":"eas build --local --platform ios --profile development",
     "build:android:local:development":"eas build --local --platform android --profile development",
-    "build:ios:local:profile":"eas build --local --platform ios --profile preview",
-    "build:android:local:profile":"eas build --local --platform android --profile preview",
+    "build:ios:local:preview":"eas build --local --platform ios --profile preview",
+    "build:android:local:preview":"eas build --local --platform android --profile preview",
     "build:ios:local:production":"eas build --local --platform ios --profile production",
     "build:android:local:production":"eas build --local --platform android --profile production"
   },
