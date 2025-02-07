@@ -13,34 +13,37 @@
 <body>
   <div id="app">
     <div class="flex flex-col gap-4 mx-auto p-4 h-full">
-      <h1 class="text-2xl font-bold mb-4">Fetch and Store Items in IndexDB</h1>
-      
+      <h1 class="text-2xl font-bold mb-4">
+        Fetch and Store Items in IndexDB
+      </h1>
+
       <div>
-        <h2 class="font-bold">Fetch Response:</h2>
+        <div class="flex flex-wrap gap-2 items-center my-2">
+          <h2 class="font-bold">Fetch Response:</h2>
+          <button id="fetchItemsButton" class="bg-blue-500 text-white p-1 rounded">
+            Fetch Items
+          </button>
+          <button id="storeItemsButton" class="bg-green-500 text-white p-1 rounded">
+            Save to IndexDB
+          </button>
+          <button id="prevPageButton" class="bg-gray-500 text-white p-1 rounded">
+            Previous Page
+          </button>
+          <button id="nextPageButton" class="bg-gray-500 text-white p-1 rounded">
+            Next Page
+          </button>
+        </div>
         <pre id="responseOutput" class="border p-4 h-64 overflow-auto"></pre>
       </div>
-      
+
       <div>
-        <h2 class="font-bold">Index DB content:</h2>
+        <div class="flex flex-wrap gap-2 items-center my-2">
+          <h2 class="font-bold">Index DB content:</h2>
+          <button id="clearIndexedDBButton" class="bg-red-500 text-white p-1 rounded">
+            Clear IndexDB
+          </button>
+        </div>
         <ul id="itemList" class="border list-disc p-4 h-64 overflow-y-auto"></ul>
-      </div>
-      
-      <div class="flex flex-wrap gap-2">
-        <button id="fetchItemsButton" class="bg-blue-500 text-white p-1 rounded">
-          Fetch Items
-        </button>
-        <button id="storeItemsButton" class="bg-green-500 text-white p-1 rounded">
-          Save to IndexDB
-        </button>
-        <button id="clearIndexedDBButton" class="bg-red-500 text-white p-1 rounded">
-          Clear IndexDB
-        </button>
-        <button id="prevPageButton" class="bg-gray-500 text-white p-1 rounded">
-          Previous Page
-        </button>
-        <button id="nextPageButton" class="bg-gray-500 text-white p-1 rounded">
-          Next Page
-        </button>
       </div>
 
       <span>Debug v0.0.1</span>
