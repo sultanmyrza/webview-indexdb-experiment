@@ -1,58 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite App</title>
-  <!-- Load Tailwind CSS via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-
-<body>
-  <div id="app">
-    <div class="flex flex-col gap-4 mx-auto p-4 h-full">
-      <h1 class="text-2xl font-bold mb-4">
-        Fetch and Store Items in IndexDB
-      </h1>
-
-      <div>
-        <div class="flex flex-wrap gap-2 items-center my-2">
-          <h2 class="font-bold">Fetch Response:</h2>
-          <button id="fetchItemsButton" class="bg-blue-500 text-white p-1 rounded">
-            Fetch Items
-          </button>
-          <button id="storeItemsButton" class="bg-green-500 text-white p-1 rounded">
-            Save to IndexDB
-          </button>
-          <button id="prevPageButton" class="bg-gray-500 text-white p-1 rounded">
-            Previous Page
-          </button>
-          <button id="nextPageButton" class="bg-gray-500 text-white p-1 rounded">
-            Next Page
-          </button>
-        </div>
-        <pre id="responseOutput" class="border p-4 h-64 overflow-auto"></pre>
-      </div>
-
-      <div>
-        <div class="flex flex-wrap gap-2 items-center my-2">
-          <h2 class="font-bold">Index DB content:</h2>
-          <button id="reloadIndexedDBButton" class="bg-yellow-500 text-white p-1 rounded">
-            Reload IndexDB
-          </button>
-          <button id="clearIndexedDBButton" class="bg-red-500 text-white p-1 rounded">
-            Clear IndexDB
-          </button>
-        </div>
-        <ul id="itemList" class="border list-disc p-4 h-64 overflow-y-auto"></ul>
-      </div>
-
-      <span>Debug v0.1.1</span>
-    </div>
-  </div>
-  <script type="module" src="/src/main.js"></script>
-</body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React + TS</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
