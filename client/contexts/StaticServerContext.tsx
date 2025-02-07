@@ -44,8 +44,9 @@ export function StaticServerProvider({ children }: { children: ReactNode }) {
       // Create server
       const staticServer = new Server({
         fileDir: staticFilesDir,
-        port: 0, // Let the server pick an available port
-        hostname: "127.0.0.1", // Local loopback address
+        stopInBackground: true,
+        port: 8188,
+        hostname: "127.0.0.1",
       });
 
       // Add state listener for debugging
