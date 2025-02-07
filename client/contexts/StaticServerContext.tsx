@@ -33,7 +33,7 @@ export function StaticServerProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<string | null>(null);
   const [serverUrl, setServerUrl] = useState<string | null>(null);
   const [server, setServer] = useState<Server | null>(null);
-  const ZIP_URL = "http://10.186.242.51:3000/content.zip";
+  const ZIP_URL = "http://10.186.242.48:3000/content.zip";
 
   const startServer = async () => {
     try {
