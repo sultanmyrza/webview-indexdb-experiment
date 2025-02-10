@@ -13,11 +13,16 @@ import * as Network from "expo-network";
  * of the static files directory containing the unzipped content from content.zip.
  */
 export const getStaticFilesDir = async (): Promise<string> => {
-  const ZIP_URL = "http://10.186.242.48:3000/content.zip"; // TODO: extract to env var
+  const ZIP_URL = process.env.EXPO_PUBLIC_ZIP_URL;
   const STATIC_FILES_DIR = `${FileSystem.documentDirectory}content/`;
 
   const network = await Network.getNetworkStateAsync();
   if (network.isConnected) {
+    if (!ZIP_URL) {
+      throw new Error(
+        "The ZIP_URL is required for downloading content. Please ensure it is defined."
+      );
+    }
     return await downloadAndUnzip(ZIP_URL, STATIC_FILES_DIR);
   } else {
     // TODO: @sultanmyrza Edge Cases to Consider:
