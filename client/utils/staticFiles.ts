@@ -13,7 +13,7 @@ import * as Network from "expo-network";
  * of the static files directory containing the unzipped content from content.zip.
  */
 export const getStaticFilesDir = async (): Promise<string> => {
-  const ZIP_URL = "http://10.186.242.48:3000/content.zip"; // TODO: extract to env var
+  const ZIP_URL = "http://10.186.242.31:3000/content.zip"; // TODO: extract to env var
   const STATIC_FILES_DIR = `${FileSystem.documentDirectory}content/`;
 
   const network = await Network.getNetworkStateAsync();
