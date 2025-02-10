@@ -10,15 +10,24 @@
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint",
-    "build:ios:local:development":"eas build --local --platform ios --profile development",
-    "build:android:local:development":"eas build --local --platform android --profile development",
-    "build:ios:local:preview":"eas build --local --platform ios --profile preview",
-    "build:android:local:preview":"eas build --local --platform android --profile preview",
-    "build:ios:local:production":"eas build --local --platform ios --profile production",
-    "build:android:local:production":"eas build --local --platform android --profile production"
+    "build:ios:local:development": "eas build --local --platform ios --profile development",
+    "build:android:local:development": "eas build --local --platform android --profile development",
+    "build:ios:local:preview": "eas build --local --platform ios --profile preview",
+    "build:android:local:preview": "eas build --local --platform android --profile preview",
+    "build:ios:local:production": "eas build --local --platform ios --profile production",
+    "build:android:local:production": "eas build --local --platform android --profile production"
   },
   "jest": {
     "preset": "jest-expo"
+  },
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "exclude": [
+          "react-native-zip-archive"
+        ]
+      }
+    }
   },
   "dependencies": {
     "@dr.pogodin/react-native-fs": "^2.31.0",
