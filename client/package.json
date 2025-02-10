@@ -15,7 +15,8 @@
     "build:ios:local:preview": "eas build --local --platform ios --profile preview",
     "build:android:local:preview": "eas build --local --platform android --profile preview",
     "build:ios:local:production": "eas build --local --platform ios --profile production",
-    "build:android:local:production": "eas build --local --platform android --profile production"
+    "build:android:local:production": "eas build --local --platform android --profile production",
+    "clean:builds": "rm -f build-*.{apk,aab,ipa}"
   },
   "jest": {
     "preset": "jest-expo"
