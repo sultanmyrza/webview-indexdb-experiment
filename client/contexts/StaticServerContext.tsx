@@ -13,6 +13,8 @@ type StaticServerContextType = {
   error: string | null;
   serverUrl: string | null;
   restartServer: () => Promise<void>;
+  serverLogs: string[];
+  clearServerLogs: () => void;
 };
 
 const StaticServerContext = createContext<StaticServerContextType | null>(null);
@@ -32,6 +34,7 @@ export function StaticServerProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<string | null>(null);
   const [serverUrl, setServerUrl] = useState<string | null>(null);
   const [server, setServer] = useState<Server | null>(null);
+  const [serverLogs, setServerLogs] = useState<string[]>([]);
 
   const startServer = async () => {
     try {
@@ -46,11 +49,18 @@ export function StaticServerProvider({ children }: { children: ReactNode }) {
         fileDir: staticFilesDir,
         stopInBackground: true,
         port: 8188,
-        hostname: "127.0.0.1",
       });
 
-      // Add state listener for debugging
       staticServer.addStateListener((state, details, error) => {
+        const newLogs = [
+          `FileDir: ${staticFilesDir}`,
+          `Origin: ${server?.origin}`,
+          `New state: "${STATES[state]}".`,
+          `Details: "${details}".`,
+          `Error: "${JSON.stringify(error)}".`,
+        ];
+        setServerLogs([...serverLogs, ...newLogs]);
+
         console.log(
           `[server.addStateListener] Origin: ${server?.origin}`,
           `[server.addStateListener] New state: "${STATES[state]}".\n`,
@@ -84,6 +94,10 @@ export function StaticServerProvider({ children }: { children: ReactNode }) {
     startServer();
   };
 
+  const clearServerLogs = () => {
+    setServerLogs([]);
+  };
+
   useEffect(() => {
     startServer();
 
@@ -94,7 +108,14 @@ export function StaticServerProvider({ children }: { children: ReactNode }) {
 
   return (
     <StaticServerContext.Provider
-      value={{ loading, error, serverUrl, restartServer }}
+      value={{
+        loading,
+        error,
+        serverUrl,
+        restartServer,
+        serverLogs,
+        clearServerLogs,
+      }}
     >
       {children}
     </StaticServerContext.Provider>
