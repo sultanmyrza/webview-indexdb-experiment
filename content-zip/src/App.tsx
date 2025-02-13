@@ -1,0 +1,42 @@
+import { useState } from "react";
+import "./App.css";
+import { useIndexedDB } from "./useIndexedDB";
+
+function App() {
+  const { getTimestampData, storeTimestampData } = useIndexedDB();
+  const [message, setMessage] = useState<string | null>(null);
+  const [data, setData] = useState<Object | null>(null);
+
+  const handleStoreData = () => {
+    const data = {
+      id: 1, // Ensure the ID matches the keyPath in your IndexedDB
+      value: Math.random(), // Random value
+      timestamp: new Date().toISOString(), // ISO timestamp
+    };
+    storeTimestampData(data);
+  };
+
+  const handleGetData = async () => {
+    const result = await getTimestampData();
+    if (typeof result === "string") {
+      setMessage(result);
+    }
+    if (typeof result === "object") {
+      setMessage(null);
+      setData(result);
+    }
+  };
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      <div style={{ display: "flex", gap: 8 }}>
+        <button onClick={handleStoreData}>Store Data</button>
+        <button onClick={handleGetData}>Get Data</button>
+      </div>
+      {message && <span>{message}</span>}
+      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+    </div>
+  );
+}
+
+export default App;
