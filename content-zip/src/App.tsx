@@ -12,7 +12,6 @@ function App() {
     const data = {
       id: 1, // Ensure the ID matches the keyPath in your IndexedDB
       value: inputValue,
-      timestamp: new Date().toISOString(), // ISO timestamp
     };
     storeTimestampData(data);
     setInputValue("");
@@ -30,19 +29,43 @@ function App() {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-      <div style={{ display: "flex", gap: 8 }}>
-        <input 
-          type="text" 
-          value={inputValue} 
-          onChange={(e) => setInputValue(e.target.value)}
-          placeholder="Enter a value"
-        />
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 16,
+        maxWidth: "400px",
+        margin: "0 auto",
+      }}
+    >
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        placeholder="Enter a value"
+        style={{
+          width: "100%",
+          padding: 12,
+          fontSize: 16,
+        }}
+      />
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
         <button onClick={handleStoreData}>Store Data</button>
         <button onClick={handleGetData}>Get Data</button>
       </div>
       {message && <span>{message}</span>}
-      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+      {data && (
+        <pre
+          style={{
+            overflow: "auto",
+            maxHeight: "200px",
+            width: "100%",
+            whiteSpace: "pre-wrap",
+          }}
+        >
+          {JSON.stringify(data, null, 2)}
+        </pre>
+      )}
     </div>
   );
 }

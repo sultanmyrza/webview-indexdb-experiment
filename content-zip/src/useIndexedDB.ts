@@ -26,7 +26,7 @@ export const useIndexedDB = () => {
   };
 
   // Store data in IndexedDB
-  const storeTimestampData = (data: { id: number; value: string; timestamp: string }) => {
+  const storeTimestampData = (data: { id: number; value: string }) => {
     if (!db) {
       console.error("Database not initialized.");
       return;
